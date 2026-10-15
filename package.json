@@ -1,12 +1,8 @@
 {
-  "name": "opencode-tg-bridge",
+  "name": "opencode-web",
   "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "start": "node index.js"
-  },
-  "dependencies": {
-    "node-telegram-bot-api": "^0.66.0"
+    "start": "opencode web --hostname 0.0.0.0 --port ${PORT:-4096}"
   }
 }
