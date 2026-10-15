@@ -6,8 +6,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN npm install -g opencode-ai
 
-WORKDIR /workspace
+WORKDIR /app
 
-ENV HOSTNAME=0.0.0.0
+COPY package.json ./
+RUN npm install --omit=dev
 
-CMD ["sh", "-c", "opencode web --hostname 0.0.0.0 --port ${PORT:-4096}"]
+COPY index.js ./
+
+ENV NODE_ENV=production
+
+CMD ["npm", "start"]

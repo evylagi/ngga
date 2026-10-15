@@ -1,5 +1,12 @@
 {
-  "name": "opencode-web",
+  "name": "opencode-web-wrapper",
   "version": "1.0.0",
-  "private": true
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
