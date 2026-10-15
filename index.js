@@ -1,11 +1,6 @@
-const OPENCODE_URL = process.env.OPENCODE_SERVER_URL;
-const OPENCODE_USER = process.env.OPENCODE_SERVER_USERNAME || "opencode";
-const OPENCODE_PASS = process.env.OPENCODE_SERVER_PASSWORD;
-
-if (!OPENCODE_URL || !OPENCODE_PASS) {
-  console.error("Missing required environment variables");
-  process.exit(1);
-}
+const OPENCODE_URL = "https://ngga-production.up.railway.app";
+const OPENCODE_USER = "opencode";
+const OPENCODE_PASS = "keem";
 
 const authHeader =
   "Basic " +
@@ -35,6 +30,25 @@ async function sendPrompt(prompt) {
   );
 }
 
-export { sendPrompt };
+async function main() {
+  const prompt = process.argv.slice(2).join(" ");
 
-console.log("OpenCode client started");
+  if (!prompt) {
+    console.log('Usage: node index.js "Your prompt here"');
+    return;
+  }
+
+  try {
+    const reply = await sendPrompt(prompt);
+    console.log(reply);
+  } catch (error) {
+    console.error("Request failed:", error.message);
+    process.exitCode = 1;
+  }
+}
+
+if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
+  main();
+}
+
+export { sendPrompt };
