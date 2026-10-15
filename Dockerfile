@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl ca-certificates git bash \
     && rm -rf /var/lib/apt/lists/*
 
-RUN npm install -g opencode-ai
+RUN npm install -g opencode-ai && opencode --version
 
 WORKDIR /app
 
